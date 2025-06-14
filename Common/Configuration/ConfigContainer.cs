@@ -52,8 +52,6 @@ public class PathConfig
 
 public class ServerOption
 {
-    public bool EnableMission { get; set; } = false;
-    public string DefaultGender { get; set; } = "Woman";
     public string Language { get; set; } = "EN";
     public string FallbackLanguage { get; set; } = "EN";
     public string[] DefaultPermissions { get; set; } = ["Admin"];

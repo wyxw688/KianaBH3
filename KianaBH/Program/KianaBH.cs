@@ -51,8 +51,6 @@ public class KianaBH
         var elapsed = DateTime.Now - time;
         Logger.Info(I18NManager.Translate("Server.ServerInfo.ServerStarted",
             Math.Round(elapsed.TotalSeconds, 2).ToString(CultureInfo.InvariantCulture)));
-        if (ConfigManager.Config.ServerOption.EnableMission)
-            Logger.Warn(I18NManager.Translate("Server.ServerInfo.MissionEnabled"));
     }
 
     # region Exit
