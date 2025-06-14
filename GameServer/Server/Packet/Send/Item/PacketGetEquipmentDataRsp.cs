@@ -8,7 +8,7 @@ public class PacketGetEquipmentDataRsp : BasePacket
 {
     public PacketGetEquipmentDataRsp(PlayerInstance player) : base(CmdIds.GetEquipmentDataRsp)
     {
-        var proto = new GetEquipmentDataRsp // TODO
+        var proto = new GetEquipmentDataRsp
         {
             WeaponList = { player.InventoryManager!.Data.WeaponItems.Select(weapon => weapon.ToWeaponProto()) }
         };

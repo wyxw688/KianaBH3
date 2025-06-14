@@ -164,8 +164,6 @@ public class DatabaseHelper
             }
 
             return null;
-
-            return null;
         }
         catch (Exception e)
         {

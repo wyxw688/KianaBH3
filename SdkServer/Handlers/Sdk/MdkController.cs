@@ -1,5 +1,6 @@
 ﻿using KianaBH.Data.Models.Sdk;
 using KianaBH.Database.Account;
+using KianaBH.Util;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KianaBH.SdkServer.Models.Sdk;
@@ -12,13 +13,23 @@ public class MdkController : Controller
     {
         var account = AccountData.GetAccountByUserName(request.Account!);
 
+        if (account == null && !ConfigManager.Config.ServerOption.AutoCreateUser) 
+        {
+            return Ok(new ResponseBase
+            {
+                Retcode = -101,
+                Success = false,
+                Message = "Account not found"
+            });
+        };
+
         // Make new account
-        if (account == null)
+        if (account == null && ConfigManager.Config.ServerOption.AutoCreateUser)
         {
             AccountData.CreateAccount(request.Account!, 0, request.Password!);
 
             account = AccountData.GetAccountByUserName(request.Account!)!;
-        }
+        };
 
         return Ok(new MdkShieldResponse
         {

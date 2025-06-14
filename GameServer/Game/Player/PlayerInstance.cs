@@ -7,6 +7,8 @@ using KianaBH.GameServer.Game.Avatar;
 using KianaBH.GameServer.Game.Battle;
 using KianaBH.GameServer.Game.Inventory;
 using KianaBH.GameServer.Server;
+using KianaBH.GameServer.Server.Packet.Send.Avatar;
+using KianaBH.GameServer.Server.Packet.Send.Item;
 using KianaBH.KcpSharp;
 using KianaBH.Util.Extensions;
 
@@ -107,6 +109,12 @@ public class PlayerInstance(PlayerData data)
     public Proto.GetMainDataRsp ToProto()
     {
         return Data.ToProto();
+    }
+
+    public async ValueTask SyncAll()
+    {
+        await SendPacket(new PacketGetEquipmentDataRsp(this));
+        await SendPacket(new PacketGetAvatarDataRsp(AvatarManager!.AvatarData!.Avatars!.ToList(), true));
     }
 
     #endregion

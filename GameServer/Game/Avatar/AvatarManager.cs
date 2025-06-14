@@ -13,16 +13,17 @@ namespace KianaBH.GameServer.Game.Avatar;
 public class AvatarManager(PlayerInstance player) : BasePlayerManager(player)
 {
     public AvatarData AvatarData { get; } = DatabaseHelper.GetInstanceOrCreateNew<AvatarData>(player.Uid);
-    public async ValueTask<AvatarDataExcel?> AddAvatar(int avatarId, bool sync = true)
+    public async ValueTask<AvatarDataExcel?> AddAvatar(int avatarId, int level = 1, int? star = null, bool sync = true)
     {
+        if (AvatarData.Avatars.Any(a => a.AvatarId == avatarId)) return null;
         GameData.AvatarData.TryGetValue(avatarId, out var avatarExcel);
         if (avatarExcel == null) return null;
 
         var avatar = new AvatarInfo
         {
-            Level = 1,
+            Level = level,
             Timestamp = Extensions.GetUnixSec(),
-            Star = avatarExcel.UnlockStar,
+            Star = star ?? avatarExcel.UnlockStar,
             DressId = avatarExcel.DefaultDressId,
             DressList = {avatarExcel.DefaultDressId},
             AvatarId = avatarExcel.AvatarID,
@@ -39,14 +40,12 @@ public class AvatarManager(PlayerInstance player) : BasePlayerManager(player)
         var weapon = GameData.WeaponData.TryGetValue(avatarExcel.InitialWeapon, out var weaponConfig);
         if (weaponConfig != null) 
         {
-            var item = await Player.InventoryManager!.AddItem(avatarExcel.InitialWeapon, 1, ItemMainTypeEnum.Weapon, weaponConfig.MaxLv, avatarId);
+            var item = await Player.InventoryManager!.AddItem(avatarExcel.InitialWeapon, 1, ItemMainTypeEnum.Weapon, weaponConfig.MaxLv, avatarId, sync: sync);
             if (item != null)
             {
                 avatar.WeaponUniqueId = item!.UniqueId;
             };
         };
-
-        
 
         AvatarData.Avatars.Add(avatar);
 

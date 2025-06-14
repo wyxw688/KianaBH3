@@ -15,9 +15,9 @@ public class PlayerData : BaseDatabaseDataHelper
     public int Exp { get; set; } = 0;
     public int HCoin { get; set; } = 0;
     public int Stamina { get; set; } = 240;
-    public int HeadIcon { get; set; } = 161090;
+    public int HeadIcon { get; set; } = 161001;
     public int HeadFrame { get; set; } = 200001;
-    public int WarshipId { get; set; } = 400004;
+    public int WarshipId { get; set; } = 0;
     public int PhonePendantId { get; set; } = 350005;
     public int AssistantAvatarId { get; set; } = 101;
     public int BirthDay { get; set; } = 0;

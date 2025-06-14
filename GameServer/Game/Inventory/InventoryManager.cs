@@ -3,6 +3,7 @@ using KianaBH.Database;
 using KianaBH.Database.Inventory;
 using KianaBH.Enums.Item;
 using KianaBH.GameServer.Game.Player;
+using KianaBH.GameServer.Server.Packet.Send.Item;
 using KianaBH.Proto;
 using KianaBH.Util;
 using static KianaBH.Proto.MasterPupilRetcode.Types;
@@ -13,8 +14,7 @@ public class InventoryManager(PlayerInstance player) : BasePlayerManager(player)
 {
     public InventoryData Data = DatabaseHelper.GetInstanceOrCreateNew<InventoryData>(player.Uid);
 
-    public async ValueTask<ItemData?> AddItem(int itemId, int count, ItemMainTypeEnum type, int level = 1, int equipAvatar = 0, bool notify = true,
-         bool sync = true)
+    public async ValueTask<ItemData?> AddItem(int itemId, int count, ItemMainTypeEnum type, int level = 1, int equipAvatar = 0, bool sync = true)
     {
         ItemData? itemData = null;
 
@@ -33,6 +33,8 @@ public class InventoryManager(PlayerInstance player) : BasePlayerManager(player)
             default:
                 break;
         }
+
+        if (sync) await Player.SendPacket(new PacketGetEquipmentDataRsp(Player));
 
         return itemData;
     }

@@ -9,6 +9,8 @@ public class AvatarDataExcel : ExcelResource
     [JsonPropertyName("unlockStar")] public int UnlockStar { get; set; }
     [JsonPropertyName("initialWeapon")] public int InitialWeapon { get; set; }
     [JsonPropertyName("skillList")] public List<int> SkillList { get; set; } = [];
+    public string FaceAnimationGroupName { get; set; } = "";
+
     public int DefaultDressId { get; set; }
 
     public override int GetId()
