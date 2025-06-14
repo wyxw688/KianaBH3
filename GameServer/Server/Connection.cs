@@ -175,6 +175,10 @@ public class Connection(KcpConversation conversation, IPEndPoint remote) : KcpCo
             }
             return;
         }
+
+        if (ConfigManager.Config.ServerOption.EnableDebug &&
+                 ConfigManager.Config.ServerOption.DebugNoHandlerPacket)
+            Logger.Error($"No handler found for {packetName}({opcode})");
     }
 
     private async Task SendDummy(string packetName)

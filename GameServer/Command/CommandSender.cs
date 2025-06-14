@@ -1,5 +1,6 @@
 ﻿using KianaBH.Enums.Player;
 using KianaBH.GameServer.Game.Player;
+using KianaBH.GameServer.Server.Packet.Send.Chat;
 using KianaBH.Util;
 
 namespace KianaBH.GameServer.Command;
@@ -31,7 +32,7 @@ public class PlayerCommandSender(PlayerInstance player) : ICommandSender
 
     public async ValueTask SendMsg(string msg)
     {
-        // TODO SEND MSG
+        await Player.SendPacket(new PacketRecvChatMsgNotify(msg));
     }
 
     public int GetSender()

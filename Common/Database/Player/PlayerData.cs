@@ -11,16 +11,16 @@ public class PlayerData : BaseDatabaseDataHelper
 {
     public string? Name { get; set; } = "";
     public string? Signature { get; set; } = "KianaPS";
-    public uint Level { get; set; } = 88;
-    public uint Exp { get; set; } = 0;
-    public uint HCoin { get; set; } = 0;
-    public uint Stamina { get; set; } = 240;
-    public uint HeadIcon { get; set; } = 161090;
-    public uint HeadFrame { get; set; } = 200001;
-    public uint WarshipId { get; set; } = 400004;
-    public uint PhonePendantId { get; set; } = 350005;
-    public uint AssistantAvatarId { get; set; } = 101;
-    public uint BirthDay { get; set; } = 0;
+    public int Level { get; set; } = 88;
+    public int Exp { get; set; } = 0;
+    public int HCoin { get; set; } = 0;
+    public int Stamina { get; set; } = 240;
+    public int HeadIcon { get; set; } = 161090;
+    public int HeadFrame { get; set; } = 200001;
+    public int WarshipId { get; set; } = 400004;
+    public int PhonePendantId { get; set; } = 350005;
+    public int AssistantAvatarId { get; set; } = 101;
+    public int BirthDay { get; set; } = 0;
     [SugarColumn(IsJson = true)] public WarshipAvatarData WarshipAvatar { get; set; } = new();
     [SugarColumn(IsNullable = true)] public long LastActiveTime { get; set; }
     public long RegisterTime { get; set; } = Extensions.GetUnixSec();
@@ -35,23 +35,23 @@ public class PlayerData : BaseDatabaseDataHelper
         return new GetMainDataRsp
         {
             IsAll = true,
-            AssistantAvatarId = 0,
-            Birthday = BirthDay,
+            AssistantAvatarId = (uint)AssistantAvatarId,
+            Birthday = (uint)BirthDay,
             Nickname = Name,
-            Level = Level,
-            Exp = Exp,
-            Hcoin = HCoin,
-            CustomHeadId = HeadIcon,
+            Level = (uint)Level,
+            Exp = (uint)Exp,
+            Hcoin = (uint)HCoin,
+            CustomHeadId = (uint)HeadIcon,
             RegisterTime = (uint)RegisterTime,
             WarshipAvatar = new Proto.WarshipAvatarData
             {
-                WarshipFirstAvatarId = 0,
-                WarshipSecondAvatarId = 0,
+                WarshipFirstAvatarId = (uint)WarshipAvatar.FirstAvatarId,
+                WarshipSecondAvatarId = (uint)WarshipAvatar.SecondAvatarId,
             },
             SelfDesc = Signature,
-            UseFrameId = HeadFrame,
-            OnPhonePendantId = PhonePendantId,
-            Stamina = Stamina,
+            UseFrameId = (uint)HeadFrame,
+            OnPhonePendantId = (uint)PhonePendantId,
+            Stamina = (uint)Stamina,
             StaminaRecoverConfigTime = GameConstants.STAMINA_RECOVERY_TIME,
             StaminaRecoverLeftTime = GameConstants.STAMINA_RECOVERY_TIME,
             EquipmentSizeLimit = GameConstants.INVENTORY_MAX_EQUIPMENT,
@@ -59,7 +59,7 @@ public class PlayerData : BaseDatabaseDataHelper
             LevelLockId = 1,
             WarshipTheme = new WarshipThemeData
             {
-                WarshipId=0
+                WarshipId=(uint)WarshipId
             },
             TotalLoginDays = 1
         };
@@ -68,6 +68,6 @@ public class PlayerData : BaseDatabaseDataHelper
 
 public class WarshipAvatarData
 {
-    public uint FirstAvatarId { get; set; } = 101;
-    public uint SecondAvatarId { get; set; } = 0;
+    public int FirstAvatarId { get; set; } = 101;
+    public int SecondAvatarId { get; set; } = 0;
 }

@@ -12,8 +12,8 @@ public class HandlerSetWarshipAvatarReq : Handler
         var player = connection.Player!;
         var req = SetWarshipAvatarReq.Parser.ParseFrom(data);
 
-        player.Data.WarshipAvatar.FirstAvatarId = req.FirstAvatarId;
-        player.Data.WarshipAvatar.SecondAvatarId = req.SecondAvatarId;
+        player.Data.WarshipAvatar.FirstAvatarId = (int)req.FirstAvatarId;
+        player.Data.WarshipAvatar.SecondAvatarId = (int)req.SecondAvatarId;
 
         await connection.SendPacket(new PacketGetMainDataRsp(req.FirstAvatarId,req.SecondAvatarId));
         await connection.SendPacket(CmdIds.SetWarshipAvatarRsp);

@@ -71,12 +71,11 @@ public class ServerOption
 
 public class ServerProfile
 {
-    public string Name { get; set; } = "Server";
+    public string Name { get; set; } = "Ai-chan";
     public int Uid { get; set; } = 80;
-    public string Signature { get; set; } = "Type /help for a list of commands";
-    public int Level { get; set; } = 1;
-    public int HeadIcon { get; set; } = 200105;
-    public int ChatBubbleId { get; set; } = 220001;
-    public int DisplayAvatarId { get; set; } = 1001;
-    public int DisplayAvatarLevel { get; set; } = 1;
+    public int AvatarId { get; set; } = 3201;
+    public int DressId { get; set; } = 593201;
+    public int FrameId { get; set; } = 200001;
+    public int HeadId { get; set; } = 161080;
+
 }

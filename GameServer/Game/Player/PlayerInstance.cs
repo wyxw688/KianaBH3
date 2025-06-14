@@ -4,6 +4,7 @@ using KianaBH.Database.Account;
 using KianaBH.Database.Client;
 using KianaBH.Database.Player;
 using KianaBH.GameServer.Game.Avatar;
+using KianaBH.GameServer.Game.Battle;
 using KianaBH.GameServer.Game.Inventory;
 using KianaBH.GameServer.Server;
 using KianaBH.KcpSharp;
@@ -20,6 +21,7 @@ public class PlayerInstance(PlayerData data)
     public PlayerData Data { get; set; } = data;
     public ClientData? ClientData { get; private set; }
     public GuideData? GuideData { get; private set; }
+    public WorldChatManager? WorldChatManager { get; private set; }
     public int Uid { get; set; }
     public Connection? Connection { get; set; }
     public bool Initialized { get; set; }
@@ -53,6 +55,7 @@ public class PlayerInstance(PlayerData data)
         InventoryManager = new InventoryManager(this);
         ClientData = InitializeDatabase<ClientData>();
         GuideData = InitializeDatabase<GuideData>();
+        WorldChatManager = new WorldChatManager(this);
         Data.LastActiveTime = Extensions.GetUnixSec();
 
         await Task.CompletedTask;
