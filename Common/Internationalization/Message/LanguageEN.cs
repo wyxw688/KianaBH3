@@ -209,7 +209,7 @@ public class HelpTextEN
         "Usage: /help [cmd]";
     public string Commands => "Commands: ";
     public string CommandUsage => "Usage: ";
-    public string CommandPermission => "Level Permission Untuk Access: ";
+    public string CommandPermission => "Level Permission For Access: ";
     public string CommandAlias => "Command Alias：";
 }
 
@@ -219,14 +219,23 @@ public class HelpTextEN
 public class ValkTextEN
 {
     public string Desc => "Set attributes for owned characters\n" +
-                          "Note: -1 means all owned characters";
+                          "Note: -1 means all owned characters\n";
 
     public string Usage =>
-        "Usage: /valk add [AvatarID/-1] l<Level> s<Star>\n\n";
+        "Usage: /valk add [ValkID/-1] l<Level> s<Star>\n\n" +
+        "Usage: /valk level [ValkID/-1] [Level]\n\n" +
+        "Usage: /valk star [ValkID/-1] [Star]\n\n" +
+        "Usage: /valk skill [ValkID/-1] for max skill level";
 
     public string ValkNotFound => "Character does not exist!";
     public string ValkAddedAll => "Granted all characters to player!";
     public string ValkAdded => "Granted character {0} to player!";
+    public string ValkSetLevelAll => "Set all characters to level {0}!";
+    public string ValkSetLevel => "Set character {0} to level {1}!";
+    public string ValkSetStarAll => "Set all characters' Resonance to {0}!";
+    public string ValkSetStar => "Set character {0}'s Resonance to {1}!";
+    public string ValkSetSkillLevelAll => "Set all characters' skill levels to max!";
+    public string ValkSetSkillLevel => "Set character {0}'s skill levels to max!";
 }
 
 

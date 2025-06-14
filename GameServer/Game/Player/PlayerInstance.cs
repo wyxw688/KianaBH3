@@ -111,6 +111,11 @@ public class PlayerInstance(PlayerData data)
         return Data.ToProto();
     }
 
+    public async ValueTask SyncValk()
+    {
+        await SendPacket(new PacketGetAvatarDataRsp(AvatarManager!.AvatarData!.Avatars!.ToList(), true));
+    }
+
     public async ValueTask SyncAll()
     {
         await SendPacket(new PacketGetEquipmentDataRsp(this));

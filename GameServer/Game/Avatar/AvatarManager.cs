@@ -54,9 +54,8 @@ public class AvatarManager(PlayerInstance player) : BasePlayerManager(player)
         return avatarExcel;
     }
 
-    public AvatarInfo? GetAvatar(uint avatarId)
+    public AvatarInfo? GetAvatar(int avatarId)
     {
-
         return AvatarData.Avatars.Find(avatar => avatar.AvatarId == avatarId);
     }
 }

@@ -66,7 +66,7 @@ public class AvatarInfo
             avatarSkill.SubSkillList.AddRange(skill.SubSkillList.Select(x => new Proto.AvatarSubSkill
             {
                 SubSkillId = (uint)x.SubSkillId,
-                Level = x.Level,
+                Level = (uint)x.Level,
                 IsMask = x.IsMask
             }));
 
@@ -84,7 +84,7 @@ public class AvatarSkill
 public class AvatarSubSkill
 {
     public int SubSkillId { get; set; }
-    public uint Level { get; set; }
+    public int Level { get; set; }
     public bool IsMask { get; set; }
 }
 public class AvatarArtifactDetail

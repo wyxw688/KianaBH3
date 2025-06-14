@@ -1,4 +1,5 @@
 ﻿using KianaBH.Data;
+using KianaBH.Database.Avatar;
 using KianaBH.Enums.Player;
 using KianaBH.Internationalization;
 
@@ -8,7 +9,7 @@ namespace KianaBH.GameServer.Command.Commands;
 public class CommandValk : ICommands
 {
     [CommandMethod("add")]
-    public async ValueTask GetRole(CommandArg arg)
+    public async ValueTask GetValk(CommandArg arg)
     {
         if (!await arg.CheckOnlineTarget()) return;
 
@@ -38,5 +39,150 @@ public class CommandValk : ICommands
             await arg.SendMsg(I18NManager.Translate("Game.Command.Valk.ValkAdded",
                 valk!.FaceAnimationGroupName ?? valkId.ToString()));
         }
+    }
+
+    [CommandMethod("level")]
+    public async ValueTask SetValkLevel(CommandArg arg)
+    {
+        if (!await arg.CheckOnlineTarget()) return;
+        if (!await arg.CheckArgCnt(2)) return;
+
+        var valkId = arg.GetInt(0);
+        var level = Math.Max(1, Math.Min(80, arg.GetInt(1))); // Limit level to 1-80
+
+        if (valkId == -1)
+        {
+            // set level for all valk
+            foreach (var config in arg.Target!.Player!.AvatarManager!.AvatarData.Avatars)
+            {
+                config.Level = level;
+            }
+            await arg.SendMsg(I18NManager.Translate("Game.Command.Valk.ValkSetLevelAll", level.ToString()));
+        }
+        else
+        {
+            var valk = arg.Target!.Player!.AvatarManager!.GetAvatar(valkId);
+            if (valk == null)
+            {
+                await arg.SendMsg(I18NManager.Translate("Game.Command.Valk.ValkNotFound"));
+                return;
+            }
+
+            valk.Level = level;
+            await arg.SendMsg(I18NManager.Translate("Game.Command.Valk.ValkSetLevel",
+                valkId.ToString(), level.ToString()));
+        }
+        await arg.Target!.Player!.SyncValk();
+    }
+
+    [CommandMethod("star")]
+    public async ValueTask SetValkStar(CommandArg arg)
+    {
+        if (!await arg.CheckOnlineTarget()) return;
+        if (!await arg.CheckArgCnt(2)) return;
+
+        var valkId = arg.GetInt(0);
+        var star = Math.Max(1, Math.Min(5, arg.GetInt(1))); // Limit star to 1-5
+
+        if (valkId == -1)
+        {
+            // set star for all valk
+            foreach (var config in arg.Target!.Player!.AvatarManager!.AvatarData.Avatars)
+            {
+                config.Star = star;
+            }
+            await arg.SendMsg(I18NManager.Translate("Game.Command.Valk.ValkSetStarAll", star.ToString()));
+        }
+        else
+        {
+            var valk = arg.Target!.Player!.AvatarManager!.GetAvatar(valkId);
+            if (valk == null)
+            {
+                await arg.SendMsg(I18NManager.Translate("Game.Command.Valk.ValkNotFound"));
+                return;
+            }
+
+            valk.Star = star;
+            await arg.SendMsg(I18NManager.Translate("Game.Command.Valk.ValkSetStar",
+                valkId.ToString(), star.ToString()));
+        }
+        await arg.Target!.Player!.SyncValk();
+    }
+
+    [CommandMethod("skill")]
+    public async ValueTask SetValkSkill(CommandArg arg)
+    {
+        if (!await arg.CheckOnlineTarget()) return;
+        if (!await arg.CheckArgCnt(1)) return;
+
+        var valkId = arg.GetInt(0);
+        if (valkId == -1)
+        {
+            foreach (var valk in arg.Target!.Player!.AvatarManager!.AvatarData.Avatars)
+            {
+                foreach (var skill in valk.SkillList)
+                {
+                    var subSkillList = GameData.AvatarSubSkillData.Values
+                        .Where(x => x.SkillId == skill.SkillId);
+
+                    foreach (var subSkillData in subSkillList)
+                    {
+                        var subSkill = skill.SubSkillList
+                            .Find(x => x.SubSkillId == subSkillData.AvatarSubSkillId);
+
+                        if (subSkill != null)
+                        {
+                            subSkill.Level = subSkillData.MaxLv;
+                        }
+                        else
+                        {
+                            skill.SubSkillList.Add(new AvatarSubSkill
+                            {
+                                SubSkillId = subSkillData.AvatarSubSkillId,
+                                Level = subSkillData.MaxLv
+                            });
+                        }
+                    }
+                }
+            }
+            await arg.SendMsg(I18NManager.Translate("Game.Command.Valk.ValkSetSkillLevelAll"));
+        }
+        else
+        {
+            var valk = arg.Target!.Player!.AvatarManager!.GetAvatar(valkId);
+            if (valk == null)
+            {
+                await arg.SendMsg(I18NManager.Translate("Game.Command.Valk.ValkNotFound"));
+                return;
+            }
+
+            foreach (var skill in valk.SkillList)
+            {
+                var subSkillList = GameData.AvatarSubSkillData.Values
+                    .Where(x => x.SkillId == skill.SkillId);
+
+                foreach (var subSkillData in subSkillList)
+                {
+                    var subSkill = skill.SubSkillList
+                        .Find(x => x.SubSkillId == subSkillData.AvatarSubSkillId);
+
+                    if (subSkill != null)
+                    {
+                        subSkill.Level = subSkillData.MaxLv;
+                    }
+                    else
+                    {
+                        skill.SubSkillList.Add(new AvatarSubSkill
+                        {
+                            SubSkillId = subSkillData.AvatarSubSkillId,
+                            Level = subSkillData.MaxLv
+                        });
+                    }
+                }
+            }
+            await arg.SendMsg(I18NManager.Translate("Game.Command.Valk.ValkSetSkillLevel",
+                valkId.ToString()));
+        }
+        await arg.Target!.Player!.SyncValk();
     }
 }

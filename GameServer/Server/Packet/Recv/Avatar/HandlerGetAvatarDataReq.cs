@@ -14,7 +14,7 @@ public class HandlerGetAvatarDataReq : Handler
         var player = connection.Player!;
         var avatars = req.AvatarIdList.Any(id => id != 0)
             ? req.AvatarIdList
-                .Select(id => player.AvatarManager!.GetAvatar(id))
+                .Select(id => player.AvatarManager!.GetAvatar((int)id))
                 .Where(avatar => avatar != null)
                 .ToList()!
             : player.AvatarManager?.AvatarData?.Avatars?.ToList();
