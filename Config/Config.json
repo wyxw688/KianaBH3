@@ -1,0 +1,64 @@
+{
+  "HttpServer": {
+    "BindAddress": "0.0.0.0",
+    "PublicAddress": "127.0.0.1",
+    "Port": 619,
+    "UseSSL": true
+  },
+  "Key": {
+    "KeyStoreFile": "FireflyDH.pfx",
+    "KeyStorePassword": "lethe",
+    "Ec2bKeyFile": "ClientSecretKey.ec2b"
+  },
+  "GameServer": {
+    "BindAddress": "0.0.0.0",
+    "PublicAddress": "127.0.0.1",
+    "Port": 2007,
+    "KcpAliveMs": 45000,
+    "DatabaseName": "firefly.db",
+    "GameServerId": "FireflyDH",
+    "GameServerName": "FireflyDH",
+    "UsePacketEncryption": true
+  },
+  "Path": {
+    "ResourcePath": "Resources",
+    "ConfigPath": "Config",
+    "DatabasePath": "Config/Database",
+    "HandbookPath": "Config/Handbook",
+    "LogPath": "Config/Logs",
+    "KeyPath": "Config/Keys",
+    "DataPath": "Config/Data"
+  },
+  "ServerOption": {
+    "EnableMission": false,
+    "DefaultGender": "Woman",
+    "Language": "EN",
+    "FallbackLanguage": "EN",
+    "Region": "BETAOVERSEA",
+    "DefaultPermissions": [
+      "Admin"
+    ],
+    "ServerBanner": {
+      "EnableBanner": true,
+      "Content": "Welcome to FireflyDH!",
+      "AdminContent": "Welcome to FireflyDH (Admin Access)!"
+    },
+    "ServerProfile": {
+      "Name": "Server",
+      "Uid": 80,
+      "Signature": "Type /help for a list of commands",
+      "Level": 1,
+      "HeadIcon": 200105,
+      "ChatBubbleId": 220001,
+      "DisplayAvatarId": 1001,
+      "DisplayAvatarLevel": 1
+    },
+    "AutoCreateUser": true,
+    "UseRealPassword": true,
+    "SavePersonalDebugFile": false,
+    "UseCache": true
+  },
+  "MuipServer": {
+    "AdminKey": "8f52aa3f-ad56-4d48-acc8-651151e4d989"
+  }
+}
