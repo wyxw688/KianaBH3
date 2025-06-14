@@ -1,3 +1,4 @@
+using System.Security.Cryptography;
 using KianaBH.Data;
 using KianaBH.KcpSharp;
 using KianaBH.Proto;
@@ -36,6 +37,13 @@ public class PacketGeneralActivityGetScheduleRsp : BasePacket
                 EndTime = time,
             });
         }
+        proto.ScheduleList.Add(new GeneralActivityScheduleInfo
+        {
+            ActivityId = 50000006,
+            SettleTime = time,
+            EndTime = time,
+            EndDayTime = time
+        });
 
         SetData(proto);
     }

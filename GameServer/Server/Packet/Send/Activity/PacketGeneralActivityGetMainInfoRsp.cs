@@ -2,6 +2,7 @@ using Google.Protobuf.Collections;
 using KianaBH.Data;
 using KianaBH.KcpSharp;
 using KianaBH.Proto;
+using KianaBH.Util.Extensions;
 
 namespace KianaBH.GameServer.Server.Packet.Send.Activity;
 
@@ -19,30 +20,19 @@ public class PacketGeneralActivityGetMainInfoRsp : BasePacket
                 GeneralBasicInfo = new GeneralActivityBasicInfo
                 {
                     ActivityId = activityId,
-                    ScheduleId = series?.Series ?? 0,
-                    SeriesActivityId ={ activityId }
+                    //ScheduleId = series?.Series ?? 0,
+                    //SeriesActivityId ={ activityId }
                 }
             };
 
-            GameData.GeneralActivityStageGroupData
-                .TryGetValue((int)activityId, out var activityStage);
-
-            if (activityStage != null)
+            activity.ActivityStage = new GeneralActivityStage
             {
-                activity.ActivityStage = new GeneralActivityStage
-                {
-                    StageGroupScheduleList =
-                    {
-                        activityStage.Select(x => new GeneralActivityStageGroupScheduleInfo
-                        {
-                            BeginTime = 1593223200,
-                            EndTime = 1913140799,
-                            StageGroupId = x.StageGroupId
-                        })
-                        
-                    }
-                };
-            }
+                EnterTimes = 1,
+                ExchangeTimes = 1,
+            };
+
+
+
             return activity;
         });
 

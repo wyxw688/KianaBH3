@@ -9,55 +9,21 @@ public class PacketGetStageDataRsp : BasePacket
 {
     public PacketGetStageDataRsp(RepeatedField<uint> StageIdList) : base(CmdIds.GetStageDataRsp)
     {
-        var isAll = StageIdList.Count == 1 && StageIdList[0] == 0;
-
         var stageData = GameData.StageDataMain;
-
-        var stageList = isAll
-            ? stageData.Values.Select(stage => new Proto.Stage
-            {
-                Id = stage.LevelId,
-                Progress = 1,
-                ChallengeIndexList =
-                {
-                    stage.ChallengeList.Count == 3
-                        ? new uint[] { 0, 1, 2 }
-                        : new uint[] { 0 }
-                },
-                IsDone = true,
-                MaxRank = 1
-            })
-            : stageData.Values
-                .Where(stage => StageIdList.Contains(stage.LevelId))
-                .Select(stage => new Proto.Stage
-                {
-                    Id = stage.LevelId,
-                    Progress = 1,
-                    ChallengeIndexList =
-                    {
-                        stage.ChallengeList.Count == 3
-                            ? new uint[] { 0, 1, 2 }
-                            : new uint[] { 0 }
-                    },
-                    IsDone = true,
-                    MaxRank = 1
-                });
-
         var proto = new GetStageDataRsp
         {
-            IsAll = isAll,
-            FinishedChapterList = { Enumerable.Range(1, 43).Select(i => (uint)i) },
-            EventDataList =
+            IsAll = true,
+            StageList =
             {
-                new StageEventData
+                stageData.Values.Select(stage => new Proto.Stage
                 {
-                    BeginTime = 1729108800,
-                    EndTime = 1990911600,
-                    ChapterId = 200,
-                    UnlockLevel = 30
-                }
-            },
-            StageList = {  }
+                    Id = stage.LevelId,
+                    Progress = stage.MaxProgress,
+                    EnterTimes = 0,
+                    ChallengeIndexList = { stage.ChallengeList.Count == 3 ? new uint[] { 0, 1, 2 } : new uint[0] },
+                    IsDone = true,
+                }).ToList(),
+            }
         };
 
         SetData(proto);
