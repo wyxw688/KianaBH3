@@ -4,6 +4,7 @@ using KianaBH.Internationalization;
 using KianaBH.Util;
 using Newtonsoft.Json;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace KianaBH.KianaBH.Tool;
 
@@ -40,8 +41,7 @@ public static class HandbookGenerator
     public static void Generate(string lang)
     {
         var textMapPath = ConfigManager.Config.Path.ResourcePath + "/TextMap/TextMap" + lang + ".json";
-        var fallbackTextMapPath = ConfigManager.Config.Path.ResourcePath + "/TextMap/TextMap" +
-                                  ConfigManager.Config.ServerOption.FallbackLanguage + ".json";
+        
         if (!File.Exists(textMapPath))
         {
             Logger.GetByClassName().Error(I18NManager.Translate("Server.ServerInfo.FailedToReadItem", textMapPath,
@@ -49,18 +49,9 @@ public static class HandbookGenerator
             return;
         }
 
-        if (!File.Exists(fallbackTextMapPath))
-        {
-            Logger.GetByClassName().Error(I18NManager.Translate("Server.ServerInfo.FailedToReadItem", textMapPath,
-                I18NManager.Translate("Word.NotFound")));
-            return;
-        }
+        List<TextMapEntry> textMap = JsonConvert.DeserializeObject<List<TextMapEntry>>(File.ReadAllText(textMapPath))!;
 
-        var textMap = JsonConvert.DeserializeObject<Dictionary<long, string>>(File.ReadAllText(textMapPath));
-        var fallbackTextMap =
-            JsonConvert.DeserializeObject<Dictionary<long, string>>(File.ReadAllText(fallbackTextMapPath));
-
-        if (textMap == null || fallbackTextMap == null)
+        if (textMap == null)
         {
             Logger.GetByClassName().Error(I18NManager.Translate("Server.ServerInfo.FailedToReadItem", textMapPath,
                 I18NManager.Translate("Word.Error")));
@@ -92,4 +83,15 @@ public static class HandbookGenerator
     {
         File.WriteAllText($"{ConfigManager.Config.Path.HandbookPath}/Handbook{lang}.txt", content);
     }
+}
+
+public class TextMapEntry
+{
+    [JsonPropertyName("value")] public ValueEntry? Value { get; set; }
+    [JsonPropertyName("text")] public string? Text { get; set; }
+}
+
+public class ValueEntry
+{
+    [JsonPropertyName("hash")] public int Hash { get; set; }
 }

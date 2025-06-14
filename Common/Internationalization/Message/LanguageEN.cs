@@ -40,7 +40,7 @@ public class WordTextEN
     public string Material => "Material";
     public string Pet => "Pet";
     public string Relic => "Relic";
-    public string Equipment => "Light Cone";
+    public string Weapon => "Weapon";
     public string Talent => "Talent";
     public string Banner => "Gacha";
     public string Activity => "Activity";
@@ -120,6 +120,7 @@ public class CommandTextEN
     public NoticeTextEN Notice { get; } = new();
     public HelpTextEN Help { get; } = new();
     public ValkTextEN Valk { get; } = new();
+    public GiveAllTextEN GiveAll { get; } = new();
 }
 
 #endregion
@@ -238,6 +239,19 @@ public class ValkTextEN
     public string ValkSetSkillLevel => "Set character {0}'s skill levels to max!";
 }
 
+/// <summary>
+///     path: Game.Command.GiveAll
+/// </summary>
+public class GiveAllTextEN
+{
+    public string Desc => "Give all items of specified type\n" +
+                          "weapon: weapons";
+
+    public string Usage =>
+        "Usage: /giveall weapon";
+
+    public string GiveAllItems => "Granted all {0}";
+}
 
 #endregion
 
