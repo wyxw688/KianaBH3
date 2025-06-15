@@ -17,9 +17,7 @@ public class AvatarInfo
     public int Exp { get; set; }
     public int Fragment { get; set; }
     public int WeaponUniqueId { get; set; }
-    public int StigmataUniqueId1 { get; set; }
-    public int StigmataUniqueId2 { get; set; }
-    public int StigmataUniqueId3 { get; set; }
+    public Dictionary<int, int> Stigmata { get; set; } = [];
     public List<AvatarSkill> SkillList { get; set; } = [];
     public int TouchGoodFeel { get; set; }
     public int TodayHasAddGoodFeel { get; set; }
@@ -40,9 +38,9 @@ public class AvatarInfo
             Exp = (uint)Exp,
             Fragment = (uint)Fragment,
             WeaponUniqueId = (uint)WeaponUniqueId,
-            StigmataUniqueId1 = (uint)StigmataUniqueId1,
-            StigmataUniqueId2 = (uint)StigmataUniqueId2,
-            StigmataUniqueId3 = (uint)StigmataUniqueId3,
+            StigmataUniqueId1 = (uint)(Stigmata.TryGetValue(1, out var id1) ? id1 : 0),
+            StigmataUniqueId2 = (uint)(Stigmata.TryGetValue(2, out var id2) ? id2 : 0),
+            StigmataUniqueId3 = (uint)(Stigmata.TryGetValue(3, out var id3) ? id3 : 0),
             TouchGoodfeel = (uint)TouchGoodFeel,
             TodayHasAddGoodfeel = (uint)TodayHasAddGoodFeel,
             StageGoodfeel = (uint)StageGoodFeel,
