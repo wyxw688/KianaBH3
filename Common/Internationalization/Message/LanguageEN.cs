@@ -35,21 +35,13 @@ public class ServerTextEN
 /// </summary>
 public class WordTextEN
 {
-    public string Rank => "Rank";
-    public string Avatar => "Avatar";
+    public string Star => "Star";
+    public string Valk => "Valkyrie";
     public string Material => "Material";
-    public string Pet => "Pet";
-    public string Relic => "Relic";
+    public string Stigmata => "Stigmata";
     public string Weapon => "Weapon";
-    public string Talent => "Talent";
     public string Banner => "Gacha";
     public string Activity => "Activity";
-    public string CdKey => "CdKey";
-    public string VideoKey => "VideoKey";
-    public string Buff => "Blessing";
-    public string Miracle => "Curio";
-    public string Unlock => "Luxury";
-    public string TrainParty => "TrainParty";
 
     // server info
     public string Config => "Config File";
@@ -60,8 +52,6 @@ public class WordTextEN
     public string CustomData => "Custom Data";
     public string Database => "Database";
     public string Command => "Command";
-    public string SSL => "SSL";
-    public string Ec2b => "Ec2b";
     public string SdkServer => "Web Server";
     public string Handler => "Packet Handler";
     public string Dispatch => "Global Dispatch";
@@ -69,39 +59,6 @@ public class WordTextEN
     public string Handbook => "Handbook";
     public string NotFound => "Not Found";
     public string Error => "Error";
-    public string FloorInfo => "Floor File";
-    public string FloorGroupInfo => "Floor Group File";
-    public string FloorMissingResult => "Teleportation and World Generation";
-    public string FloorGroupMissingResult => "Teleportation, Monster Battles, and World Generation";
-    public string Mission => "Mission";
-    public string MissionInfo => "Mission File";
-    public string SubMission => "Sub Mission";
-    public string SubMissionInfo => "Sub Mission File";
-    public string MazeSkill => "Maze Skill";
-    public string MazeSkillInfo => "Maze Skill File";
-    public string Dialogue => "Simulated Universe Event";
-    public string DialogueInfo => "Simulated Universe Event File";
-    public string Performance => "Performance";
-    public string PerformanceInfo => "Performance File";
-    public string RogueChestMap => "Simulated Universe Map";
-    public string RogueChestMapInfo => "Simulated Universe Map File";
-    public string ChessRogueRoom => "Simulated Universe DLC";
-    public string ChessRogueRoomInfo => "Simulated Universe DLC File";
-    public string SummonUnit => "Summon Unit";
-    public string SummonUnitInfo => "Summon Unit File";
-    public string RogueTournRoom => "Divergent Rogue Room";
-    public string RogueTournRoomInfo => "Divergent Rogue Room File";
-    public string TypesOfRogue => "types of rogue";
-    public string RogueMagicRoom => "Unknowable Domain Room";
-    public string RogueMagicRoomInfo => "Unknowable Domain Room File";
-    public string RogueDiceSurface => "Dice Surface Effect";
-    public string RogueDiceSurfaceInfo => "Dice Surface Effect File";
-    public string AdventureModifier => "AdventureModifier";
-    public string AdventureModifierInfo => "AdventureModifier File";
-    public string RogueMapGen => "RogueMapGen File";
-    public string RogueMiracleGroup => "RogueMiracleGroup File";
-    public string RogueMiracleEffectGen => "RogueMiracleEffectGen File";
-
     public string DatabaseAccount => "Database Account";
     public string Tutorial => "Tutorial";
 }
@@ -245,10 +202,11 @@ public class ValkTextEN
 public class GiveAllTextEN
 {
     public string Desc => "Give all items of specified type\n" +
-                          "weapon: weapons";
+                          "weapon,stigmata";
 
     public string Usage =>
-        "Usage: /giveall weapon";
+        "Usage: /giveall weapon\n\n" +
+        "Usage: /giveall stigmata";
 
     public string GiveAllItems => "Granted all {0}";
 }

@@ -24,13 +24,13 @@ public class ItemData
     public int Count { get; set; }
     public int Level { get; set; }
     public int Exp { get; set; }
-    public bool Locked { get; set; }
-    public bool AffixIdentify { get; set; }
+    public bool IsLocked { get; set; }
+    public bool IsAffixIdentify { get; set; }
     public uint CancelLockedTime { get; set; }
     public bool Extracted { get; set; }
     public int SlotNum { get; set; }
-    public int Refine { get; set; }
-    public int Promote { get; set; }
+    public int RefineValue { get; set; }
+    public int PromoteTimes { get; set; }
     public int Homology { get; set; }
     public List<int> QuantumBranchLists { get; set; } = [];
     public List<Rune> RuneLists { get; set; } = [];
@@ -56,8 +56,55 @@ public class ItemData
             UniqueId = (uint)UniqueId,
             Level = (uint)Level,
             Exp = (uint)Exp,
-            IsProtected = Locked,
+            IsProtected = IsLocked,
             IsExtracted = Extracted,
+        };
+    }
+
+    public Stigmata ToStigmataProto()
+    {
+        return new Stigmata
+        {
+            Id= (uint)ItemId,
+            UniqueId= (uint)UniqueId,
+            Level= (uint)Level,
+            Exp= (uint)Exp,
+            SlotNum = (uint)SlotNum,
+            RefineValue = (uint)RefineValue,
+            PromoteTimes = (uint)PromoteTimes,
+            IsProtected= IsLocked,
+            IsAffixIdentify = IsAffixIdentify,
+            RuneList =
+            {
+                RuneLists.Select(x => new StigmataRune
+                {
+                    RuneId = (uint)x.RuneId,
+                    StrengthPercent = (uint)x.Strength,
+                })
+            },
+            WaitSelectRuneList =
+            {
+                WaitSelectRuneLists.Select(x => new StigmataRune
+                {
+                    RuneId = (uint)x.RuneId,
+                    StrengthPercent = (uint)x.Strength,
+                })
+            },
+            WaitSelectRuneGroupList =
+            {
+                WaitSelectRuneGroupLists.Select(x => new StigmataRuneGroup
+                {
+                    UniqueId = (uint)x.UniqueId,
+                    RuneList =
+                    {
+                        RuneLists.Select(l => new StigmataRune
+                        {
+                            RuneId = (uint)l.RuneId,
+                            StrengthPercent = (uint)l.Strength,
+                        })
+                    }
+                })
+            }
         };
     }
 }

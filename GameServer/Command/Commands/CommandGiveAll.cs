@@ -16,7 +16,19 @@ public class CommandGiveall : ICommands
         {
             var item = await arg.Target!.Player!.InventoryManager!.AddItem(conf.ID, 1, ItemMainTypeEnum.Weapon, conf.MaxLv, sync:false);
         }
-        await arg.Target!.Player!.SyncWeapon();
+        await arg.Target!.Player!.SyncInventory();
         await arg.SendMsg(I18NManager.Translate("Game.Command.GiveAll.GiveAllItems", I18NManager.Translate("Word.Weapon")));
+    }
+
+    [CommandMethod("stigmata")]
+    public async ValueTask GiveStigmata(CommandArg arg)
+    {
+        if (!await arg.CheckOnlineTarget()) return;
+        foreach (var conf in GameData.StigmataData.Values.Where(stigmata => stigmata.Rarity == stigmata.MaxRarity))
+        {
+            var item = await arg.Target!.Player!.InventoryManager!.AddItem(conf.ID, 1, ItemMainTypeEnum.Stigmata, conf.MaxLv, sync: false);
+        }
+        await arg.Target!.Player!.SyncInventory();
+        await arg.SendMsg(I18NManager.Translate("Game.Command.GiveAll.GiveAllItems", I18NManager.Translate("Word.Stigmata")));
     }
 }

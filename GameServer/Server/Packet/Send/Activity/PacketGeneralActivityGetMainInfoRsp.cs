@@ -2,7 +2,6 @@ using Google.Protobuf.Collections;
 using KianaBH.Data;
 using KianaBH.KcpSharp;
 using KianaBH.Proto;
-using KianaBH.Util.Extensions;
 
 namespace KianaBH.GameServer.Server.Packet.Send.Activity;
 
@@ -30,8 +29,6 @@ public class PacketGeneralActivityGetMainInfoRsp : BasePacket
                 EnterTimes = 1,
                 ExchangeTimes = 1,
             };
-
-
 
             return activity;
         });

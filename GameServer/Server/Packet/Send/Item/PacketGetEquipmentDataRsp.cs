@@ -10,7 +10,9 @@ public class PacketGetEquipmentDataRsp : BasePacket
     {
         var proto = new GetEquipmentDataRsp
         {
-            WeaponList = { player.InventoryManager!.Data.WeaponItems.Select(weapon => weapon.ToWeaponProto()) }
+            WeaponList = { player.InventoryManager!.Data.WeaponItems.Select(weapon => weapon.ToWeaponProto()) },
+            StigmataList = { player.InventoryManager!.Data.StigmataItems.Select(stigmata => stigmata.ToStigmataProto()) },
+            MaterialList = { player.InventoryManager!.Data.MaterialItems.Select(material => material.ToMaterialProto()) }
         };
 
         SetData(proto);

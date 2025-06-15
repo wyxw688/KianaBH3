@@ -111,7 +111,7 @@ public class PlayerInstance(PlayerData data)
         return Data.ToProto();
     }
 
-    public async ValueTask SyncWeapon()
+    public async ValueTask SyncInventory()
     {
         await SendPacket(new PacketGetEquipmentDataRsp(this));
     }

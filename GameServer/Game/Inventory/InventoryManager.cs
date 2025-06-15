@@ -30,6 +30,10 @@ public class InventoryManager(PlayerInstance player) : BasePlayerManager(player)
                 if (weaponConfig == null) return null;
                 itemData = await PutItem(itemId, 1, type, level, equipAvatar: equipAvatar, uniqueId: ++Data.NextUniqueId);
                 break;
+            case ItemMainTypeEnum.Stigmata:
+                GameData.StigmataData.TryGetValue(itemId, out var stigmataConfig);
+                itemData = await PutItem(itemId, 1, type, level, uniqueId: ++Data.NextUniqueId);
+                break;
             default:
                 break;
         }
@@ -63,7 +67,6 @@ public class InventoryManager(PlayerInstance player) : BasePlayerManager(player)
                     item = oldItem;
                     break;
                 }
-
                 Data.MaterialItems.Add(item);
                 break;
             case ItemMainTypeEnum.Weapon:
@@ -71,7 +74,6 @@ public class InventoryManager(PlayerInstance player) : BasePlayerManager(player)
                 {
                     return item;
                 }
-
                 Data.WeaponItems.Add(item);
                 break;
             case ItemMainTypeEnum.Stigmata:
