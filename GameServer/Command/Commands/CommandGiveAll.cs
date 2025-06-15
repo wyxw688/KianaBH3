@@ -31,4 +31,17 @@ public class CommandGiveall : ICommands
         await arg.Target!.Player!.SyncInventory();
         await arg.SendMsg(I18NManager.Translate("Game.Command.GiveAll.GiveAllItems", I18NManager.Translate("Word.Stigmata")));
     }
+
+    [CommandMethod("material")]
+    public async ValueTask GiveMaterial(CommandArg arg)
+    {
+        if (!await arg.CheckOnlineTarget()) return;
+        foreach (var conf in GameData.MaterialData.Values)
+        {
+            var quantity = conf.Id == 100 ? 99999999 : (conf.QuantityLimit > 999 ? 999 : conf.QuantityLimit);
+            var item = await arg.Target!.Player!.InventoryManager!.AddItem(conf.Id, quantity, ItemMainTypeEnum.Material, 0, sync: false);
+        }
+        await arg.Target!.Player!.SyncInventory();
+        await arg.SendMsg(I18NManager.Translate("Game.Command.GiveAll.GiveAllItems", I18NManager.Translate("Word.Material")));
+    }
 }
