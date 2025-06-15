@@ -1,6 +1,6 @@
-﻿using KianaBH.Proto;
+﻿using KianaBH.Data;
+using KianaBH.Proto;
 using SqlSugar;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace KianaBH.Database.Inventory;
 
@@ -65,14 +65,14 @@ public class ItemData
     {
         return new Stigmata
         {
-            Id= (uint)ItemId,
-            UniqueId= (uint)UniqueId,
-            Level= (uint)Level,
-            Exp= (uint)Exp,
+            Id = (uint)ItemId,
+            UniqueId = (uint)UniqueId,
+            Level = (uint)Level,
+            Exp = (uint)Exp,
             SlotNum = (uint)SlotNum,
             RefineValue = (uint)RefineValue,
             PromoteTimes = (uint)PromoteTimes,
-            IsProtected= IsLocked,
+            IsProtected = IsLocked,
             IsAffixIdentify = IsAffixIdentify,
             RuneList =
             {
@@ -97,7 +97,7 @@ public class ItemData
                     UniqueId = (uint)x.UniqueId,
                     RuneList =
                     {
-                        RuneLists.Select(l => new StigmataRune
+                        x.RuneLists.Select(l => new StigmataRune
                         {
                             RuneId = (uint)l.RuneId,
                             StrengthPercent = (uint)l.Strength,
@@ -107,6 +107,46 @@ public class ItemData
             }
         };
     }
+
+    public List<StigmataRuneGroup> ToWaitSelectRuneGroup()
+    {
+        return WaitSelectRuneGroupLists.Select(x => new StigmataRuneGroup
+        {
+            UniqueId = (uint)x.UniqueId,
+            RuneList =
+            {
+                x.RuneLists.Select(l => new StigmataRune
+                {
+                    RuneId = (uint)l.RuneId,
+                    StrengthPercent = (uint)l.Strength,
+                })
+            }
+        }).ToList();
+    }
+
+    public StigmataRune AddRune(int min = 1, int max = 4)
+    {
+        var proto = new StigmataRune
+        {
+            RuneId = GenerateAffixId(),
+            StrengthPercent = GenerateAffixStrength()
+        };
+        return proto;
+    }
+
+    private uint GenerateAffixId()
+    {
+        Random _random = new Random();
+        var affixKeys = GameData.AffixListData.Keys.ToList();
+        int affixBase = affixKeys[_random.Next(affixKeys.Count)];
+        return (uint)affixBase;
+    }
+
+    private uint GenerateAffixStrength(int min = 1, int max = 101)
+        => (uint)(new Random().Next(
+            min > 0 && min < max ? min : 1, max > min && max < 102 ? max : 101
+        ));
+
 }
 
 public class RuneGroup

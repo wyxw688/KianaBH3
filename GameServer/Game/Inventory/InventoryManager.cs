@@ -4,6 +4,7 @@ using KianaBH.Database.Inventory;
 using KianaBH.Enums.Item;
 using KianaBH.GameServer.Game.Player;
 using KianaBH.GameServer.Server.Packet.Send.Item;
+using KianaBH.Proto;
 using KianaBH.Util;
 
 namespace KianaBH.GameServer.Game.Inventory;
@@ -199,5 +200,100 @@ public class InventoryManager(PlayerInstance player) : BasePlayerManager(player)
         item2.EquipAvatar = avatarData1.AvatarId;
 
         await Player.SyncValk();
+    }
+
+    public async ValueTask GenerateRune(int uniqueId, StigmataRefineType type, StigmataRefineTimesType times, int lockRuneIndex)
+    {
+        var item = Data.StigmataItems.Find(x => x.UniqueId == uniqueId);
+        if (item == null) return;
+
+
+        var proto = new StigmataRuneGroup
+        {
+            UniqueId = (uint)uniqueId,
+        };
+
+        switch (type)
+        {
+            case StigmataRefineType.StigmataRefineAddSlot:
+                if (item.SlotNum >= 2) return;
+                item.SlotNum++;
+                proto.RuneList.Add(item.AddRune());
+                item.WaitSelectRuneGroupLists.Add(new RuneGroup
+                {
+                    UniqueId = uniqueId,
+                    RuneLists = proto.RuneList.Select(x => new Rune
+                    {
+                       RuneId = (int)x.RuneId,
+                       Strength = (int)x.StrengthPercent,
+                    }).ToList()
+                });
+                break;
+            case StigmataRefineType.StigmataRefineNormal:
+                item.WaitSelectRuneGroupLists.Clear();
+                if (times == StigmataRefineTimesType.StigmataRefineTimesTen)
+                {
+                    for (int i = 0; i < 10; i++)
+                    {
+                        var runeList = new List<StigmataRune>
+                        {
+                            item.AddRune(), 
+                            item.AddRune(),
+                        };
+
+                        proto.RuneList.AddRange(runeList);
+
+                        item.WaitSelectRuneGroupLists.Add(new RuneGroup
+                        {
+                            UniqueId = uniqueId++,
+                            RuneLists = runeList.Select(x => new Rune
+                            {
+                                RuneId = (int)x.RuneId,
+                                Strength = (int)x.StrengthPercent,
+                            }).ToList()
+                        });
+                    }
+                }
+                else // One Time
+                {
+                    if (item.SlotNum < 2 && new Random().Next(0, 10) == 9) item.SlotNum++;
+                    if (item.SlotNum >= 1) proto.RuneList.Add(item.AddRune());
+                    if (item.SlotNum == 2) proto.RuneList.Add(item.AddRune());
+
+                    item.WaitSelectRuneGroupLists.Add(new RuneGroup
+                    {
+                        UniqueId = uniqueId++,
+                        RuneLists = proto.RuneList.Select(x => new Rune
+                        {
+                            RuneId = (int)x.RuneId,
+                            Strength = (int)x.StrengthPercent,
+                        }).ToList()
+                    });
+                }
+                break;
+        }
+        await Player.SyncInventory();
+    }
+
+
+    public async ValueTask SelectRune(int uniqueId, int selectUniqueId)
+    {
+        var item = Data.StigmataItems.Find(x => x.UniqueId == uniqueId);
+        if (item == null) return;
+
+        var select = item.WaitSelectRuneGroupLists.Find(x => x.UniqueId == selectUniqueId);
+        if (select == null) return;
+
+        item.RuneLists.Clear();
+        item.RuneLists.AddRange(
+            select.RuneLists.Select(x => new Rune
+            {
+                RuneId = x.RuneId,
+                Strength = x.Strength
+            })
+        );
+        item.WaitSelectRuneGroupLists.Clear();
+
+        await Player.SyncInventory();
     }
 }

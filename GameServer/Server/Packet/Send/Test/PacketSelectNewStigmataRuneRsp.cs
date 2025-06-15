@@ -1,15 +1,16 @@
 using KianaBH.KcpSharp;
 using KianaBH.Proto;
 
-namespace KianaBH.GameServer.Server.Packet.Send.Test;
+namespace KianaBH.GameServer.Server.Packet.Send.Item;
 
 public class PacketSelectNewStigmataRuneRsp : BasePacket
 {
-    public PacketSelectNewStigmataRuneRsp() : base(CmdIds.SelectNewStigmataRuneRsp)
+    public PacketSelectNewStigmataRuneRsp(uint selectUniqueId, bool isSelect) : base(CmdIds.SelectNewStigmataRuneRsp)
     {
         var proto = new SelectNewStigmataRuneRsp
         {
-        
+            SelectUniqueId = selectUniqueId,
+            IsSelect = isSelect
         };
 
         SetData(proto);
