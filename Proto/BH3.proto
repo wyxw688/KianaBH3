@@ -561,7 +561,7 @@ message PlayerDetailData {
   uint32 frame_id = 16;
   PlayerAdventureData adventure = 17;
   repeated AvatarDetailData backup_avatar_list = 18;
-  Medal on_medal = 19;
+  uint32 on_medal = 19;
   bool is_allow_visit = 30;
   uint32 visit_avatar = 31;
   uint32 be_liked_num = 32;
@@ -596,7 +596,7 @@ message PlayerFriendBriefData {
   string armada_name = 13;
   uint32 bond = 14;
   uint32 on_medal_id = 15;
-  Medal on_medal = 16;
+  uint32 on_medal = 16;
   uint32 frame_id = 17;
   uint32 mp_level = 18;
   uint32 custom_head_id = 19;
@@ -17223,7 +17223,7 @@ message ChatworldPlayerInfo {
   repeated ChatworldBuff buff_list = 18;
   uint32 runtime_tag = 20;
   uint32 custom_head_id = 22;
-  Medal on_medal = 23;
+  uint32 on_medal = 23;
   ChatworldBattle battle_info = 32;
 }
 
@@ -28646,7 +28646,7 @@ message GetMainDataRsp {
   uint32 register_time = 40;
   WarshipThemeData warship_theme = 41;
   repeated WaitDelMaterialData wait_del_material_list = 42;
-  Medal on_medal = 43;
+  uint32 on_medal = 43;
   repeated uint32 type_list = 44;
 }
 

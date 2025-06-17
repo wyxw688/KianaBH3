@@ -42,4 +42,8 @@ public static class GameData
     public static Dictionary<int, TutorialDataExcel> TutorialData { get; private set; } = [];
     public static Dictionary<int, CityEventPhotoExcel> CityEventPhotoData { get; private set; } = [];
     public static Dictionary<int, RandomPlotDataExcel> RandomPlotData { get; private set; } = [];
+    public static Dictionary<int, UltraEndlessSiteExcel> UltraEndlessSiteData { get; private set; } = [];
+    public static Dictionary<int, List<UltraEndlessFloorExcel>> UltraEndlessFloorData { get; private set; } = [];
+    public static Dictionary<int, ExBossMonsterDataExcel> ExBossMonsterData { get; private set; } = [];
+    
 }

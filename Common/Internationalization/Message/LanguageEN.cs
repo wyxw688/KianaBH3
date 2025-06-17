@@ -44,6 +44,9 @@ public class WordTextEN
     public string Activity => "Activity";
     public string Elf => "Elf";
     public string Dress => "Outfit";
+    public string Bracket => "Bracket";
+    public string Disturbance => "Disturbance";
+    public string Site => "Site";
 
     // server info
     public string Config => "Config File";
@@ -80,7 +83,9 @@ public class CommandTextEN
     public HelpTextEN Help { get; } = new();
     public ValkTextEN Valk { get; } = new();
     public GiveAllTextEN GiveAll { get; } = new();
-    public ElfTextEN Elf {  get; } = new();
+    public ElfTextEN Elf { get; } = new();
+    public AbyssTextEN Abyss { get; } = new();
+    public EndlessTextEN Endless { get; } = new();
 }
 
 #endregion
@@ -234,6 +239,37 @@ public class ElfTextEN
     public string ElfSetLevel => "Set Elf {0} to level {1}!";
     public string ElfSetStarAll => "Set all Elf's Resonance to {0}!";
     public string ElfSetStar => "Set Elf {0}'s Resonance to {1}!";
+}
+
+/// <summary>
+///     path: Game.Command.Abyss
+/// </summary>
+public class AbyssTextEN
+{
+    public string Desc => "Set abyss disturbance,bracket,site \n";
+
+    public string Usage =>
+        "Usage: /abyss bracket [1-9]\n\n" +
+        "Usage: /abyss temp [value]\n\n" + 
+        "Usage: /abyss site [siteId]\n";
+
+    public string Success => "Success set {0}";
+    public string AreaNotFound => "SiteId Not Found";
+}
+
+/// <summary>
+///     path: Game.Command.Endless
+/// </summary>
+public class EndlessTextEN
+{
+    public string Desc => "Set Memorial Arena boss \n";
+
+    public string Usage =>
+        "Usage: /endless [bossid1] [bossid2] [bossid3]\n\n" +
+        "/endless 1001 1002 1003";
+
+    public string Success => "Success set Memorial Arena Boss";
+    public string NotFound => "BossId Not Found";
 }
 
 #endregion

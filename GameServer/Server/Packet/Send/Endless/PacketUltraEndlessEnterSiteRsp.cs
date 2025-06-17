@@ -1,15 +1,15 @@
 using KianaBH.KcpSharp;
 using KianaBH.Proto;
 
-namespace KianaBH.GameServer.Server.Packet.Send.Test;
+namespace KianaBH.GameServer.Server.Packet.Send.Endless;
 
 public class PacketUltraEndlessEnterSiteRsp : BasePacket
 {
-    public PacketUltraEndlessEnterSiteRsp() : base(CmdIds.UltraEndlessEnterSiteRsp)
+    public PacketUltraEndlessEnterSiteRsp(uint siteId) : base(CmdIds.UltraEndlessEnterSiteRsp)
     {
         var proto = new UltraEndlessEnterSiteRsp
         {
-        
+            SiteId = siteId
         };
 
         SetData(proto);
