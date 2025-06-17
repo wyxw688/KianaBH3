@@ -21,10 +21,10 @@ public class PlayerData : BaseDatabaseDataHelper
     public int PhonePendantId { get; set; } = 350005;
     public int AssistantAvatarId { get; set; } = 101;
     public int BirthDay { get; set; } = 0;
+    [SugarColumn(IsJson = true)] public List<int> ExBossMonster { get; set; } = [51016, 4021, 36112];
     [SugarColumn(IsJson = true)] public WarshipAvatarData WarshipAvatar { get; set; } = new();
     [SugarColumn(IsNullable = true)] public long LastActiveTime { get; set; }
     [SugarColumn(IsJson = true)] public UltraEndless Abyss { get; set; } = new();
-    public List<int> ExBossMonster { get; set; } = new List<int> { 51016, 4021, 36112 };
     public long RegisterTime { get; set; } = Extensions.GetUnixSec();
 
     public static PlayerData? GetPlayerByUid(long uid)

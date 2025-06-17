@@ -14,6 +14,6 @@ public class LineupInfo
     public string? Name { get; set; }
     public uint AstraMateId { get; set; }
     public bool IsUsingAstraMate { get; set; }
-    public List<uint> AvatarIds { get; set; } = [];
-    public List<uint> ElfIds { get; set; } = [];
+    public List<int> AvatarIds { get; set; } = [];
+    public List<int> ElfIds { get; set; } = [];
 }
