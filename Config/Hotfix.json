@@ -1,35 +1,115 @@
 {
-  "Region": "None",
-  "HotfixData": {
-    "3.1.51": {
-      "AssetBundleUrl": "",
-      "ExResourceUrl": "",
-      "LuaUrl": "",
-      "IfixUrl": ""
+  "UseLocalCache": false,
+  "Hotfixes": {
+    "8.2.0": {
+      "Asb": {
+        "Android": {
+          "EnableTime": 0,
+          "Revision": "8.2.0.1",
+          "Suffix": "bd94adf56362eb867e85bec5fac2ff64"
+        },
+        "Iphone": {
+          "EnableTime": 0,
+          "Revision": "8.2.0.1",
+          "Suffix": "dfc7a720fcff0a38eff5fd39dd226be3"
+        },
+        "Pc": {
+          "EnableTime": 0,
+          "Revision": "8.2.0.1",
+          "Suffix": "9e126d53a77b950adf7eeab1ce4c8be3"
+        }
+      },
+      "AsbPreDownload": {
+        "Android": {
+          "EncryptKey": "",
+          "EnableTime": 0,
+          "Revision": "8.2.0.0",
+          "Suffix": "e201402a751b93be40d8d5667eae6c57"
+        },
+        "Iphone": {
+          "EncryptKey": "",
+          "EnableTime": 0,
+          "Revision": "8.2.0.0",
+          "Suffix": "b24e5746d5c3b4e89664c9dce0b54990"
+        }
+      },
+      "Audio": {
+        "Platform": {
+          "Android": "manifest_72379c553cacdc14de7b08eacf30742b.m",
+          "Windows": "manifest_451a3477478a452ad6d9d7d4efc8a7cc.m",
+          "iOS": "manifest_44481832f8d5ddf09c37c4c7cc2896e8.m"
+        },
+        "Revision": 750064
+      },
+      "AudioPreDownload": {
+        "EnableTime": 0,
+        "Platform": {
+          "Android": "manifest_e6bba2f4b17b0fa2b8088554c631c89a.m",
+          "Windows": "manifest_78e29a53978043c1f285dee54cb23609.m",
+          "iOS": "manifest_520e04c4be6cd2c3114a22b2cb26bdb4.m"
+        },
+        "Revision": 749901
+      },
+      "VideoEncrypt": {
+        "FileName": "product_os_video_encrypt_70f8648c65dfdcb9bc4a7272e59d0d58"
+      }
     },
-    "3.1.52": {
-      "AssetBundleUrl": "",
-      "ExResourceUrl": "",
-      "LuaUrl": "",
-      "IfixUrl": ""
-    },
-    "3.1.53": {
-      "AssetBundleUrl": "",
-      "ExResourceUrl": "",
-      "LuaUrl": "",
-      "IfixUrl": ""
-    },
-    "3.1.54": {
-      "AssetBundleUrl": "",
-      "ExResourceUrl": "",
-      "LuaUrl": "",
-      "IfixUrl": ""
-    },
-    "3.1.55": {
-      "AssetBundleUrl": "",
-      "ExResourceUrl": "",
-      "LuaUrl": "",
-      "IfixUrl": ""
+    "8.3.16": {
+      "Asb": {
+        "Android": {
+          "EnableTime": 0,
+          "Revision": "8.3.16.0",
+          "Suffix": "9f07cc5e1b062caaca620b714558a62f"
+        },
+        "Iphone": {
+          "EnableTime": 0,
+          "Revision": "8.3.16.0",
+          "Suffix": "e9f91843085699810e1bd380fbad7f2e"
+        },
+        "Pc": {
+          "EnableTime": 0,
+          "Revision": "8.3.16.0",
+          "Suffix": "25f5838501a2cb0e691ccbe236547561"
+        }
+      },
+      "AsbPreDownload": {
+        "Android": {
+          "EncryptKey": "",
+          "EnableTime": 0,
+          "Revision": "",
+          "Suffix": ""
+        },
+        "Iphone": {
+          "EncryptKey": "",
+          "EnableTime": 0,
+          "Revision": "",
+          "Suffix": ""
+        }
+      },
+      "Audio": {
+        "Platform": {
+          "Android": "manifest_db2019f164ca5c2b08ace83a99b1556f.m",
+          "Windows": "manifest_d08485b4db57926beacf2685054b4205.m",
+          "iOS": "manifest_31e7ae25754c694c58446eb7580b9682.m"
+        },
+        "Revision": 752650
+      },
+      "AudioPreDownload": {
+        "EnableTime": 0,
+        "Platform": {
+          "Android": "manifest_ea2f4e977e2658883e80527d40e68092.m",
+          "Windows": "manifest_d7d2f62561d1a732bba7c2a56871fe6f.m",
+          "iOS": "manifest_fa114f693f880cfc447114c1ff65c6b5.m"
+        },
+        "Revision": 632854
+      },
+      "VideoEncrypt": {
+        "FileName": "beta_video_encrypt_a0755879dd5a1b6e53c7451b8de88167"
+      }
     }
+  },
+  "AesKeys": {
+    "8.2.0": "62 63 63 34 32 62 32 65 38 66 32 31 39 66 62 38 33 38 32 64 64 36 65 64 36 65 64 34 36 34 36 38",
+    "8.3.16": "66 64 38 65 32 66 39 33 31 38 35 38 39 63 32 30 34 34 38 39 37 61 30 32 64 33 37 65 35 62 37 61"
   }
 }

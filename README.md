@@ -42,7 +42,7 @@ That means you need a .NET Framework
 ##### Windows
 
 ```shell
-git clone --recurse-submodules https://git.neonteam.dev/DevilProMT/KianaBH.git
+git clone --recurse-submodules https://github.com/MikuLeaks/KianaBH3.git
 cd KianaBH
 dotnet build # compile
 ```
@@ -50,7 +50,7 @@ dotnet build # compile
 ## ❓ Help
 
 Use KianaBH-Resources
-- [KianaBH-Resources](https://git.neonteam.dev/DevilProMT/KianaBH-Resources/)
+- [KianaBH-Resources](https://github.com/MikuLeaks/KianaBH3-Resources/)
 </details>
 
 ## ❕️ Troubleshooting
