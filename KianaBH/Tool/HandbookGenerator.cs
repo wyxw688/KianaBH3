@@ -49,14 +49,18 @@ public static class HandbookGenerator
             return;
         }
 
-        List<TextMapEntry> textMap = JsonConvert.DeserializeObject<List<TextMapEntry>>(File.ReadAllText(textMapPath))!;
+        List<TextMapEntry> textMapList = JsonConvert.DeserializeObject<List<TextMapEntry>>(File.ReadAllText(textMapPath))!;
 
-        if (textMap == null)
+        if (textMapList == null)
         {
             Logger.GetByClassName().Error(I18NManager.Translate("Server.ServerInfo.FailedToReadItem", textMapPath,
                 I18NManager.Translate("Word.Error")));
             return;
         }
+
+        Dictionary<long, string> textMap = [];
+
+        foreach (var map in textMapList) textMap.Add(map.Value!.Hash, map.Text!);
 
         var builder = new StringBuilder();
         builder.AppendLine("#Handbook generated in " + DateTime.Now.ToString("yyyy/MM/dd HH:mm"));
@@ -64,6 +68,26 @@ public static class HandbookGenerator
         builder.AppendLine("#Command");
         builder.AppendLine();
         GenerateCmd(builder, lang);
+
+        builder.AppendLine();
+        builder.AppendLine("#Valkyrie");
+        builder.AppendLine();
+        GenerateValk(builder, textMap);
+
+        builder.AppendLine();
+        builder.AppendLine("#Elf");
+        builder.AppendLine();
+        GenerateElf(builder, textMap);
+
+        builder.AppendLine();
+        builder.AppendLine("#Stigmata");
+        builder.AppendLine();
+        GenerateStigmata(builder, textMap);
+
+        builder.AppendLine();
+        builder.AppendLine("#Weapon");
+        builder.AppendLine();
+        GenerateWeapon(builder, textMap);
 
         builder.AppendLine();
         WriteToFile(lang, builder.ToString());
@@ -82,6 +106,42 @@ public static class HandbookGenerator
     public static void WriteToFile(string lang, string content)
     {
         File.WriteAllText($"{ConfigManager.Config.Path.HandbookPath}/Handbook{lang}.txt", content);
+    }
+
+    public static void GenerateValk(StringBuilder builder, Dictionary<long, string> map)
+    {
+        foreach (var avatar in GameData.AvatarData.Values)
+        {
+            var name = map.TryGetValue(avatar.FullName.hash, out var value) ? value : $"[{avatar.FullName.hash}]";
+            builder.AppendLine(avatar.AvatarID + ": " + name);
+        }
+    }
+
+    public static void GenerateElf(StringBuilder builder, Dictionary<long, string> map)
+    {
+        foreach (var elf in GameData.ElfAstraMateData.Values)
+        {
+            var name = map.TryGetValue(elf.FullName.hash, out var value) ? value : $"[{elf.FullName.hash}]";
+            builder.AppendLine(elf.ElfID + ": " + name);
+        }
+    }
+
+    public static void GenerateStigmata(StringBuilder builder, Dictionary<long, string> map)
+    {
+        foreach (var stigmata in GameData.StigmataData.Values)
+        {
+            var name = map.TryGetValue(stigmata.DisplayTitle.hash, out var value) ? value : $"[{stigmata.DisplayTitle.hash}]";
+            builder.AppendLine(stigmata.ID + ": " + name);
+        }
+    }
+
+    public static void GenerateWeapon(StringBuilder builder, Dictionary<long, string> map)
+    {
+        foreach (var weapon in GameData.WeaponData.Values)
+        {
+            var name = map.TryGetValue(weapon.DisplayTitle.hash, out var value) ? value : $"[{weapon.DisplayTitle.hash}]";
+            builder.AppendLine(weapon.ID + ": " + name);
+        }
     }
 }
 

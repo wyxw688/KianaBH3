@@ -13,6 +13,7 @@ public class StigmataDataExcel : ExcelResource
     [JsonPropertyName("quality")] public int Quality { get; set; }
     [JsonPropertyName("isSecurityProtect")] public bool IsSecurityProtect { get; set; }
     [JsonPropertyName("protect")] public bool Protect { get; set; }
+    [JsonPropertyName("displayTitle")] public HashName DisplayTitle { get; set; } = new();
 
     public override int GetId()
     {

@@ -8,6 +8,7 @@ public class ElfAstraMateDataExcel : ExcelResource
     public int ElfID { get; set; }
     public int MaxLevel { get; set; }
     public int MaxRarity { get; set; }
+    public HashName FullName { get; set; } = new();
 
     [JsonIgnore] public List<ElfSkillDataExcel> SkillList = [];
 

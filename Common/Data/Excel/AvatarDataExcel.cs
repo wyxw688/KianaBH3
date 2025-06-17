@@ -10,8 +10,8 @@ public class AvatarDataExcel : ExcelResource
     [JsonPropertyName("initialWeapon")] public int InitialWeapon { get; set; }
     [JsonPropertyName("skillList")] public List<int> SkillList { get; set; } = [];
     public string FaceAnimationGroupName { get; set; } = "";
-
     public int DefaultDressId { get; set; }
+    [JsonPropertyName("fullName")] public HashName FullName { get; set; } = new();
 
     public override int GetId()
     {
@@ -26,4 +26,9 @@ public class AvatarDataExcel : ExcelResource
         }
         
     }
+}
+
+public class HashName
+{
+    public long hash { get; set; } = 0;
 }

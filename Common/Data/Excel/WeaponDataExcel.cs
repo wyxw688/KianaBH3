@@ -12,6 +12,7 @@ public class WeaponDataExcel : ExcelResource
     [JsonPropertyName("maxRarity")] public int MaxRarity { get; set; }
     [JsonPropertyName("evoID")] public int EvoID { get; set; }
     [JsonPropertyName("protect")] public bool Protect { get; set; }
+    [JsonPropertyName("displayTitle")] public HashName DisplayTitle { get; set; } = new();
 
     public override int GetId()
     {
