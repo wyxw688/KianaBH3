@@ -89,27 +89,37 @@ public static partial class UrlProvider
             "os" =>
             [
                 "https://autopatchos.honkaiimpact3.com/asset_bundle/overseas01/1.1",
-                "https://bundle-aliyun-os.honkaiimpact3.com/asset_bundle/overseas01/1.1",
+                "https://bundle-aliyun-os.honkaiimpact3.com/asset_bundle/overseas01/1.1"
             ],
             "gf" when version.Contains("beta") =>
             [
-                "https://autopatchbeta.bh3.com/asset_bundle/beta_release/1.0",
-                "https://autopatchbeta.bh3.com/asset_bundle/beta_release/1.0",
+                "https://autopatchbeta.bh3.com/asset_bundle/beta_dev/1.0",
+                "https://bh3rd-beta.bh3.com/asset_bundle/beta_release/1.0",
             ],
             "gf" =>
             [
-                "https://bundle-qcloud.bh3.com/asset_bundle/android01/1.0",
-                "https://bundle.bh3.com/asset_bundle/android01/1.0",
+                "https://autopatchcn.bh3.com/asset_bundle/hun02/1.0",
+                "https://bundle.bh3.com/asset_bundle/hun02/1.0"
             ],
             "global" =>
             [
-                "http://hk-bundle-west-mihayo.akamaized.net/asset_bundle/usa01/1.1",
-                "http://bundle-aliyun-usa.honkaiimpact3.com/asset_bundle/usa01/1.1",
+                "https://autopatchglb.honkaiimpact3.com/asset_bundle/usa01/1.1",
+                "http://bundle-aliyun-usa.honkaiimpact3.com/asset_bundle/usa01/1.1"
+            ],
+            "jp" =>
+            [
+                "https://autopatchjp.honkaiimpact3.com/asset_bundle/jp01/1.1",
+                "https://bundle-aliyun-jp.honkaiimpact3.com/asset_bundle/jp01/1.1"
+            ],
+            "kr" =>
+            [
+                "https://autopatchkr.honkaiimpact3.com/asset_bundle/kr01/1.1",
+                "https://bundle-aliyun-kr.honkaiimpact3.com/asset_bundle/kr01/1.1"
             ],
             _ =>
             [
-                "https://bundle-aliyun-os.honkaiimpact3.com/asset_bundle/overseas01/1.1",
-                "https://hk-bundle-os-mihayo.akamaized.net/asset_bundle/overseas01/1.1",
+                "https://autopatchos.honkaiimpact3.com/asset_bundle/overseas01/1.1",
+                "https://bundle-aliyun-os.honkaiimpact3.com/asset_bundle/overseas01/1.1"
             ]
         };
     }
@@ -157,27 +167,37 @@ public static partial class UrlProvider
             "os" =>
             [
                 "autopatchos.honkaiimpact3.com/com.miHoYo.bh3oversea",
-                "bigfile-aliyun-os.honkaiimpact3.com/com.miHoYo.bh3oversea",
+                "bigfile-aliyun-os.honkaiimpact3.com/com.miHoYo.bh3oversea"
             ],
             "gf" when version.Contains("beta") =>
             [
                 "autopatchbeta.bh3.com/tmp/beta",
-                "autopatchbeta.bh3.com/tmp/beta",
+                "bh3rd-beta.bh3.com/tmp/beta",
             ],
             "gf" =>
             [
-                "bundle-qcloud.bh3.com/tmp/Original",
+                "autopatchcn.bh3.com/tmp/Original",
                 "bundle.bh3.com/tmp/Original",
             ],
             "global" =>
             [
-                "hk-bundle-west-mihayo.akamaized.net/tmp/com.miHoYo.bh3global",
-                "bigfile-aliyun-usa.honkaiimpact3.com/tmp/com.miHoYo.bh3global",
+                "autopatchglb.honkaiimpact3.com/tmp/com.miHoYo.bh3global",
+                "bigfile-aliyun-usa.honkaiimpact3.com/tmp/com.miHoYo.bh3global"
+            ],
+            "jp" =>
+            [
+                "autopatchjp.honkaiimpact3.com/tmp/com.miHoYo.bh3rdJP",
+                "bigfile-aliyun-jp.honkaiimpact3.com/tmp/com.miHoYo.bh3rdJP"
+            ],
+            "kr" =>
+            [
+                "autopatchkr.honkaiimpact3.com/com.miHoYo.bh3korea",
+                "bigfile-aliyun-kr.honkaiimpact3.com/com.miHoYo.bh3korea"
             ],
             _ =>
             [
-                "bigfile-aliyun-os.honkaiimpact3.com/com.miHoYo.bh3oversea",
-                "hk-bigfile-os-mihayo.akamaized.net/com.miHoYo.bh3oversea",
+                "autopatchos.honkaiimpact3.com/com.miHoYo.bh3oversea",
+                "bigfile-aliyun-os.honkaiimpact3.com/com.miHoYo.bh3oversea"
             ]
         };
     }
