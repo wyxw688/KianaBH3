@@ -5,9 +5,11 @@ using KianaBH.Database.Client;
 using KianaBH.Database.Player;
 using KianaBH.GameServer.Game.Avatar;
 using KianaBH.GameServer.Game.Battle;
+using KianaBH.GameServer.Game.Elf;
 using KianaBH.GameServer.Game.Inventory;
 using KianaBH.GameServer.Server;
 using KianaBH.GameServer.Server.Packet.Send.Avatar;
+using KianaBH.GameServer.Server.Packet.Send.Elf;
 using KianaBH.GameServer.Server.Packet.Send.Item;
 using KianaBH.KcpSharp;
 using KianaBH.Util.Extensions;
@@ -18,6 +20,7 @@ public class PlayerInstance(PlayerData data)
 {
     public AvatarManager? AvatarManager { get; private set; }
     public InventoryManager? InventoryManager { get; private set; }
+    public ElfManager? ElfManager { get; private set; }
 
     public static readonly List<PlayerInstance> _playerInstances = [];
     public PlayerData Data { get; set; } = data;
@@ -55,6 +58,7 @@ public class PlayerInstance(PlayerData data)
         Uid = Data.Uid;
         AvatarManager = new AvatarManager(this);
         InventoryManager = new InventoryManager(this);
+        ElfManager = new ElfManager(this);
         ClientData = InitializeDatabase<ClientData>();
         GuideData = InitializeDatabase<GuideData>();
         WorldChatManager = new WorldChatManager(this);
@@ -109,6 +113,11 @@ public class PlayerInstance(PlayerData data)
     public Proto.GetMainDataRsp ToProto()
     {
         return Data.ToProto();
+    }
+
+    public async ValueTask SyncElf()
+    {
+        await SendPacket(new PacketGetElfDataRsp(this));
     }
 
     public async ValueTask SyncInventory()

@@ -42,6 +42,7 @@ public class WordTextEN
     public string Weapon => "Weapon";
     public string Banner => "Gacha";
     public string Activity => "Activity";
+    public string Elf => "Elf";
 
     // server info
     public string Config => "Config File";
@@ -78,6 +79,7 @@ public class CommandTextEN
     public HelpTextEN Help { get; } = new();
     public ValkTextEN Valk { get; } = new();
     public GiveAllTextEN GiveAll { get; } = new();
+    public ElfTextEN Elf {  get; } = new();
 }
 
 #endregion
@@ -209,6 +211,26 @@ public class GiveAllTextEN
         "Usage: /giveall stigmata";
 
     public string GiveAllItems => "Granted all {0}";
+}
+
+/// <summary>
+///     path: Game.Command.Elf
+/// </summary>
+public class ElfTextEN
+{
+    public string Desc => "Set attributes for owned elfs\n" +
+                          "Note: -1 means all owned elfs\n";
+
+    public string Usage =>
+        "Usage: /elf add [ElfID/-1] l<Level> s<Star>\n\n";
+
+    public string ElfNotFound => "Elf does not exist!";
+    public string ElfAddedAll => "Granted all Elfs to player!";
+    public string ElfAdded => "Granted Elf {0} to player!";
+    public string ElfSetLevelAll => "Set all Elfs to level {0}!";
+    public string ElfSetLevel => "Set Elf {0} to level {1}!";
+    public string ElfSetStarAll => "Set all Elf's Resonance to {0}!";
+    public string ElfSetStar => "Set Elf {0}'s Resonance to {1}!";
 }
 
 #endregion

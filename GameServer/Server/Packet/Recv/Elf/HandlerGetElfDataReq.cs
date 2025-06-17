@@ -8,6 +8,6 @@ public class HandlerGetElfDataReq : Handler
 {
     public override async Task OnHandle(Connection connection, byte[] header, byte[] data)
     {
-        await connection.SendPacket(new PacketGetElfDataRsp());
+        await connection.SendPacket(new PacketGetElfDataRsp(connection.Player!));
     }
 }

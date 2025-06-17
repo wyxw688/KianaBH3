@@ -3,12 +3,12 @@
 [ResourceEntity("ElfSkillData.json")]
 public class ElfSkillDataExcel : ExcelResource
 {
-    public uint ElfSkillID { get; set; }
-    public uint MaxLv { get; set; }
-    public List<uint> ElfIds { get; set; } = [];
+    public int ElfSkillID { get; set; }
+    public int MaxLv { get; set; }
+    public List<int> ElfIDList { get; set; } = [];
     public override int GetId()
     {
-        return (int)ElfSkillID;
+        return ElfSkillID;
     }
 
     public override void Loaded()
