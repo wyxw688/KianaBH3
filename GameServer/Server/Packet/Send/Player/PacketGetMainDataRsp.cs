@@ -25,4 +25,18 @@ public class PacketGetMainDataRsp : BasePacket
 
         SetData(proto);
     }
+
+    public PacketGetMainDataRsp(uint warshipId) : base(CmdIds.GetMainDataRsp)
+    {
+        var proto = new GetMainDataRsp
+        {
+            WarshipTheme = new WarshipThemeData
+            {
+                WarshipId = (uint)warshipId,
+            },
+            TypeList = { 35 },
+        };
+
+        SetData(proto);
+    }
 }
