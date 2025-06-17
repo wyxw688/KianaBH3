@@ -8,6 +8,6 @@ public class HandlerGetExBossInfoReq : Handler
 {
     public override async Task OnHandle(Connection connection, byte[] header, byte[] data)
     {
-        await connection.SendPacket(new PacketGetExBossInfoRsp());
+        await connection.SendPacket(new PacketGetExBossInfoRsp(connection.Player!));
     }
 }
