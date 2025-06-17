@@ -1,6 +1,4 @@
-<p align="center">
-  <img src="docs/rainbow-title.svg" alt="KianaBH3" />
-</p>
+# KianaBH3
 
 <p align="center">
 <strong>KianaBH3</strong> is a server emulator of a certain adventure anime game!
