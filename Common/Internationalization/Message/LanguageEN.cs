@@ -43,6 +43,7 @@ public class WordTextEN
     public string Banner => "Gacha";
     public string Activity => "Activity";
     public string Elf => "Elf";
+    public string Dress => "Outfit";
 
     // server info
     public string Config => "Config File";
@@ -208,7 +209,9 @@ public class GiveAllTextEN
 
     public string Usage =>
         "Usage: /giveall weapon\n\n" +
-        "Usage: /giveall stigmata";
+        "Usage: /giveall stigmata\n\n" +
+        "Usage: /giveall material\n\n" +
+        "Usage: /giveall dress\n";
 
     public string GiveAllItems => "Granted all {0}";
 }

@@ -44,4 +44,23 @@ public class CommandGiveall : ICommands
         await arg.Target!.Player!.SyncInventory();
         await arg.SendMsg(I18NManager.Translate("Game.Command.GiveAll.GiveAllItems", I18NManager.Translate("Word.Material")));
     }
+
+    [CommandMethod("dress")]
+    public async ValueTask GiveDress(CommandArg arg)
+    {
+        if (!await arg.CheckOnlineTarget()) return;
+        foreach (var config in GameData.DressData.Values)
+        {
+            foreach (var valkId in config.AvatarIDList)
+            {
+                var valk = arg.Target!.Player!.AvatarManager!.GetAvatar(valkId);
+                if (valk == null) continue;
+                if (valk.DressList.Contains(config.DressID)) continue;
+                valk.DressList.Add(config.DressID);
+            }
+        }
+        await arg.Target!.Player!.SyncValk();
+        await arg.SendMsg(I18NManager.Translate("Game.Command.GiveAll.GiveAllItems", I18NManager.Translate("Word.Dress")));
+    }
 }
+
