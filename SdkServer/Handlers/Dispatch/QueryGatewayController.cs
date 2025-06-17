@@ -14,10 +14,11 @@ public class QueryGatewayController : ControllerBase
     public IActionResult QueryGateway([FromQuery] DispatchQuery query, Logger logger)
     {
         var version = HotfixContainer.ExtractVersionNumber(query.Version);
+        var hotfix_version = query.Version!;
 
-        if (!ConfigManager.Hotfix.Hotfixes.TryGetValue(version, out var hotfix))
+        if (!ConfigManager.Hotfix.Hotfixes.TryGetValue(hotfix_version, out var hotfix))
         {
-            logger.Warn($"Client sent requesting unsupported game version: {version}");
+            logger.Warn($"Client sent requesting unsupported game version: {hotfix_version}");
             return BadRequest();
         }
 

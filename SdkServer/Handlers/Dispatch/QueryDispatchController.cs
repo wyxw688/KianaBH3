@@ -13,9 +13,10 @@ public class QueryDispatchController : ControllerBase
     public IActionResult QueryDispatch([FromQuery] DispatchQuery query, Logger logger)
     {
         var version = HotfixContainer.ExtractVersionNumber(query.Version);
-        if (!ConfigManager.Hotfix.Hotfixes.ContainsKey(version))
+        var hotfix_version = query.Version!;
+        if (!ConfigManager.Hotfix.Hotfixes.ContainsKey(hotfix_version))
         {
-            logger.Warn($"Client sent requesting unsupported game version: {version}");
+            logger.Warn($"Client sent requesting unsupported game version: {hotfix_version}");
             return BadRequest();
         }
 
