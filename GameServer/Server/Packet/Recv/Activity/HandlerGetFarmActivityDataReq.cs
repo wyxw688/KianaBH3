@@ -3,6 +3,8 @@ using KianaBH.Proto;
 
 namespace KianaBH.GameServer.Server.Packet.Recv.Activity;
 
+// Removed in glb 8.3.0
+/*
 [Opcode(CmdIds.GetFarmActivityDataReq)]
 public class HandlerGetFarmActivityDataReq : Handler
 {
@@ -11,3 +13,4 @@ public class HandlerGetFarmActivityDataReq : Handler
         await connection.SendPacket(new PacketGetFarmActivityDataRsp());
     }
 }
+*/
