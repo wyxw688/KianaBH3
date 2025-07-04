@@ -1,12 +1,12 @@
-name: Build KianaBH3
+name: Build KianaBH3-8.3-CN
 
 on:
   push:
     branches:
-      - master
+      - 8.3-CN
   pull_request:
     branches:
-      - master
+      - 8.3-CN
 
 jobs:
   build:
