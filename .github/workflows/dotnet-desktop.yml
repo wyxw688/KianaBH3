@@ -22,16 +22,21 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '9.0'
-
-      - name: cd
-        run: cd KianaBH
         
-      - name: Build the project
-        run: dotnet build --configuration Release
+      - name: Publish for Linux x64
+        run: dotnet publish KianaBH/KianaBH.csproj -o Release/linux-x64 -r linux-x64 --framework net9.0 -p:PublishSingleFile=true
+
+      - name: Publish for Windows x86
+        run: dotnet publish KianaBH/KianaBH.csproj -o Release/win-x86 -r win-x86 --framework net9.0 -p:PublishSingleFile=true
+
+      - name: Publish for Windows x64
+        run: dotnet publish KianaBH/KianaBH.csproj -o Release/win-x64 -r win-x64 --framework net9.0 -p:PublishSingleFile=true
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
           name: KianaBH3-build
           path: |
-            **/bin/Release/**
+            Release/linux-x64
+            Release/win-x86
+            Release/win-x64
