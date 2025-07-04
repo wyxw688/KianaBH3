@@ -1,4 +1,4 @@
-name: Build KianaBH3-8.3-CN
+name: Build KianaBH3
 
 on:
   push:
